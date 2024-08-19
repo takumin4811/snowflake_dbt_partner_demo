@@ -13,3 +13,5 @@ create function {{target.schema}}.area_of_circle(radius float)
   ;
 
 {% endmacro %}
+
+

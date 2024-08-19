@@ -10,7 +10,7 @@ dbt-cloud:
   project-id: "64586"
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'tpch'
+profile: 'dbt_my_profile'
 
 # These configurations specify where dbt should look for different types of files.
 # The `models-paths` config, for example, states that models in this project can be
@@ -21,8 +21,6 @@ test-paths: ["tests"]
 seed-paths: ["data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
-
-
 
 target-path: "target"  # directory which will store compiled SQL files
 clean-targets:         # directories to be removed by `dbt clean`
@@ -41,6 +39,9 @@ vars:
   fct_order_items: 'mock_source__fct_order_items' # this is a map for unit testing
   dbt_metrics_calendar_model: all_days
 
+seeds:
+  +schema: RAW
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
@@ -51,7 +52,6 @@ models:
   central_data_team_partner_eng_inc:
     staging:
       +materialized: view
-
     marts:
       tpch_marts:
         materialized: table
