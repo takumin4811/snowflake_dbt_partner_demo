@@ -31,7 +31,7 @@ on-run-start:
   - '{{create_udfs()}}' # comment / uncomment this line to build UDFs called in the create_udfs macro
 
 on-run-end:
-  - "{{ grant_all_on_schemas(schemas, 'transformer') }}"
+  - "{{ grant_all_on_schemas(schemas, 'sysadmin') }}"
 
 vars:
   start_date: '1999-01-01'
@@ -47,11 +47,13 @@ seeds:
 
 models:
   +grants:
-    select: ['transformer']
+    select: ['sysadmin']
 
   central_data_team_partner_eng_inc:
     staging:
-      +materialized: view
+        materialized: table
     marts:
       tpch_marts:
+        materialized: table
+      jaffle_marts:
         materialized: table
