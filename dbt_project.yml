@@ -2,7 +2,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'central_data_team_partner_eng_inc'
+name: 'mydbtcloud'
 version: '1.5.0'
 require-dbt-version: '>=1.6.0'
 config-version: 2
@@ -11,7 +11,6 @@ dbt-cloud:
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_my_profile'
-
 # These configurations specify where dbt should look for different types of files.
 # The `models-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -27,11 +26,13 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "target"
     - "dbt_packages"
 
+
+
 on-run-start:
   - '{{create_udfs()}}' # comment / uncomment this line to build UDFs called in the create_udfs macro
 
-on-run-end:
-  - "{{ grant_all_on_schemas(schemas, 'sysadmin') }}"
+# on-run-end:
+#  - "{{ grant_all_on_schemas(schemas, 'sysadmin') }}"
 
 vars:
   start_date: '1999-01-01'
@@ -40,6 +41,7 @@ vars:
   dbt_metrics_calendar_model: all_days
 
 seeds:
+  +database: tpch
   +schema: RAW
 
 # Configuring models
@@ -49,11 +51,30 @@ models:
   +grants:
     select: ['sysadmin']
 
-  central_data_team_partner_eng_inc:
+  mydbtcloud:
     staging:
-        materialized: table
+      tpch:
+        +database: tpch
+        +schema: staging
+        +materialized: table
+      # jaffle:
+      #   +database: jaffle_shop
+      #   +schema: staging
+      #   +materialized: table
     marts:
       tpch_marts:
-        materialized: table
-      jaffle_marts:
-        materialized: table
+        +database: tpch
+        +schema: marts
+        +materialized: table
+      # jaffle_marts:
+      #   +database: jaffle_shop
+      #   +schema: marts_jaffle
+      #   +materialized: table
+    demo_examples:
+      tpch_demo:
+        +database: tpch
+        +schema: demo
+        +materialized: view
+    util:
+      +database: tpch
+      +schema: util
