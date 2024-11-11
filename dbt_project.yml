@@ -41,7 +41,7 @@ vars:
   dbt_metrics_calendar_model: all_days
 
 seeds:
-  +database: tpch
+  # +database: tpch
   +schema: RAW
 
 # Configuring models
@@ -54,7 +54,7 @@ models:
   mydbtcloud:
     staging:
       tpch:
-        +database: tpch
+        # +database: tpch
         +schema: staging
         +materialized: table
       # jaffle:
@@ -63,7 +63,7 @@ models:
       #   +materialized: table
     marts:
       tpch_marts:
-        +database: tpch
+        # +database: tpch
         +schema: marts
         +materialized: table
       # jaffle_marts:
@@ -72,9 +72,9 @@ models:
       #   +materialized: table
     demo_examples:
       tpch_demo:
-        +database: tpch
+        # +database: tpch
         +schema: demo
         +materialized: view
-    util:
-      +database: tpch
+    utils:
+      # +database: tpch
       +schema: util
