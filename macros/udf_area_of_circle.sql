@@ -1,7 +1,7 @@
 {% macro create_area_of_circle() %}
 
--- use database {{target.database}};
-use database tpch;
+use database {{target.database}};
+-- use database tpch;
 
 drop function if exists dbt_demo.area_of_circle(float);
 
