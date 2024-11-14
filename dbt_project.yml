@@ -26,8 +26,6 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "target"
     - "dbt_packages"
 
-
-
 on-run-start:
   - '{{create_udfs()}}' # comment / uncomment this line to build UDFs called in the create_udfs macro
 
@@ -40,8 +38,10 @@ vars:
   fct_order_items: 'mock_source__fct_order_items' # this is a map for unit testing
   dbt_metrics_calendar_model: all_days
 
+
 seeds:
   # +database: tpch
+  +database: jaffle_shop
   +schema: RAW
 
 # Configuring models
@@ -57,19 +57,19 @@ models:
         # +database: tpch
         +schema: staging
         +materialized: table
-      # jaffle:
-      #   +database: jaffle_shop
-      #   +schema: staging
-      #   +materialized: table
+      jaffle_shop:
+        +database: jaffle_shop
+        +schema: staging
+        +materialized: table
     marts:
       tpch_marts:
         # +database: tpch
         +schema: marts
         +materialized: table
-      # jaffle_marts:
-      #   +database: jaffle_shop
-      #   +schema: marts_jaffle
-      #   +materialized: table
+      jaffle_marts:
+        +database: jaffle_shop
+        +schema: marts_jaffle
+        +materialized: table
     demo_examples:
       tpch_demo:
         # +database: tpch
