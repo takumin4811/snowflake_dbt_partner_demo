@@ -40,7 +40,7 @@ vars:
 
 
 seeds:
-  # +schema: RAW
+  +schema: RAW
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
