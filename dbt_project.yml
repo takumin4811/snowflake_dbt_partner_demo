@@ -40,8 +40,6 @@ vars:
 
 
 seeds:
-  # +database: tpch
-  +database: jaffle_shop
   +schema: RAW
 
 # Configuring models
@@ -54,27 +52,21 @@ models:
   mydbtcloud:
     staging:
       tpch:
-        # +database: tpch
-        +schema: staging
+        +schema: tpch_staging
         +materialized: table
       jaffle_shop:
-        +database: jaffle_shop
-        +schema: staging
+        +schema: jaffle_shop_staging
         +materialized: table
     marts:
       tpch_marts:
-        # +database: tpch
-        +schema: marts
+        +schema: tpch_marts
         +materialized: table
       jaffle_marts:
-        +database: jaffle_shop
-        +schema: marts_jaffle
+        +schema: jaffle_shop_marts
         +materialized: table
     demo_examples:
       tpch_demo:
-        # +database: tpch
         +schema: demo
         +materialized: view
     utils:
-      # +database: tpch
       +schema: util

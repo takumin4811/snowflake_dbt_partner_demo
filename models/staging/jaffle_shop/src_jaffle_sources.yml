@@ -2,12 +2,10 @@ version: 2
 
 sources:
   - name: ecom
-    database: JAFFLE_SHOP
     schema: 'DBT_RAW'
     description: E-commerce data
     tables:
       - name: raw_customers
-        description: One record per person who has purchased one or more items
       - name: raw_orders
         description: One record per order (consisting of one or more order items)
         freshness:
